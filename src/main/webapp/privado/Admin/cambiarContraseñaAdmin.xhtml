@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns = "http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate/>
+        </p:messages>
+        <h:form>
+            <div id="ModificarContraseñaAdmin">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Contraseña antigua" for="@next"/>
+                    <p:inputText value="#{cambiarContraseñaAdminController.contraseñaAntigua}"/>
+                   
+                    <p:outputLabel value="Introduzca nueva contraseña:" for="@next"/>
+                    <p:password value="#{cambiarContraseñaAdminController.contraseñaNueva}" id ="password1" match="password2" required="true" requiredMessage="Nueva contraseña no introducida"/>
+                 
+                    <p:outputLabel value="Repita la nueva contraseña:" for="@next"/>
+                    <p:password id="password2" required="true" requiredMessage="Es obligatorio repetir la nueva contraseña"/>
+                 
+                     
+                    <p:commandButton value="Cambiar Contraseña" action="#{cambiarContraseñaAdminController.cambiarContraseña()}"/>
+
+                </h:panelGrid>
+               
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
