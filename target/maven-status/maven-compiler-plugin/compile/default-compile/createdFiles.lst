@@ -6,6 +6,7 @@ com\unileon\EJB\UsuarioFacadeLocal.class
 com\unileon\modelo\Usuario.class
 com\unileon\controller\CrearDescuentoController.class
 com\unileon\modelo\Descuento.class
+com\unileon\controller\Trabajador\ListarProductosController.class
 com\unileon\modelo\Producto_.class
 com\unileon\EJB\CarritoFacade.class
 com\unileon\EJB\DevolucionFacade.class
@@ -20,6 +21,7 @@ com\unileon\EJB\CopiaCarritoFacade.class
 com\unileon\modelo\Carrito.class
 com\unileon\controller\Admin\AltaTrabajadorController.class
 com\unileon\controller\Admin\ListarTrabajadorController.class
+com\unileon\controller\cliente\PrincipalController.class
 com\unileon\EJB\CarritoFacadeLocal.class
 com\unileon\EJB\DescuentoFacadeLocal.class
 com\unileon\EJB\MenuFacade.class
@@ -28,8 +30,10 @@ com\unileon\controller\Admin\EliminarTrabajadorController.class
 com\unileon\EJB\RolFacade.class
 com\unileon\modelo\Usuario_.class
 com\unileon\modelo\Devolucion.class
+com\unileon\controller\Trabajador\crearProductoController.class
 com\unileon\modelo\Venta_.class
 com\unileon\modelo\CopiaCarrito_.class
+com\unileon\controller\Trabajador\EditarProductoController.class
 com\unileon\EJB\RolFacadeLocal.class
 com\unileon\controller\Admin\EliminarUsuariosController.class
 com\unileon\modelo\Producto.class

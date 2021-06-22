@@ -29,6 +29,7 @@ public class miCuentaTrabajadorController implements Serializable{
     private String Genero;
     private Usuario usuario;
     private Persona persona;
+    private String Password;
     
     @EJB
     private UsuarioFacadeLocal UsuarioEJB;
@@ -43,12 +44,14 @@ public class miCuentaTrabajadorController implements Serializable{
     }
 
     public String getGenero() {
-        return this.Genero;
+        return Genero;
     }
 
-    public void setGeneros(String Genero) {
+    public void setGenero(String Genero) {
         this.Genero = Genero;
     }
+
+
 
     public Usuario getUsuario() {
         return usuario;
@@ -65,14 +68,53 @@ public class miCuentaTrabajadorController implements Serializable{
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
     
     public void modificar(){
         try{
             persona.setSexo(Genero);
             PersonaEJB.edit(persona);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "Se ha modificado correctamente"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Datos personales modificados correctamente"));
         }catch(Exception e){
             
         }
+    }
+     public void modificarNombreUsuario(){
+        try{
+            if(exite()){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario ya existe"));
+            }else{
+            UsuarioEJB.edit(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Nombre de usuario modificado correctamente"));
+            }
+        }catch(Exception e){
+            
+        }
+    }
+         public void modificarContraseniaUsuario(){
+        try{
+            usuario.setPassword(Password);
+            UsuarioEJB.edit(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Contraseña modificada correctamente"));
+        }catch(Exception e){
+            
+        }
+    }
+
+    private boolean exite() {
+        List<Usuario> Usuarios =UsuarioEJB.findAll();
+        for (int i = 0; i < Usuarios.size(); i++) {
+            if (Usuarios.get(i).getUser().equalsIgnoreCase(usuario.getUser())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

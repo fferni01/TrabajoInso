@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     private String Marca;
     
     @Column(name="Descripcion")
-    private int Descripcion;
+    private String Descripcion;
     
     @Column(name="Cantidad")
     private int Cantidad;
@@ -85,11 +85,11 @@ public class Producto implements Serializable {
         this.Marca = Marca;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return Descripcion;
     }
 
-    public void setDescripcion(int Descripcion) {
+    public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
 
@@ -125,18 +125,46 @@ public class Producto implements Serializable {
         this.Valoracion = Valoracion;
     }
 
+    public String getTipoEscrito() {
+        switch(Tipo){
+            case "Z":
+                return "Zapatillas";
+            case "C":
+                return "camiseta";
+            case "CM":
+                return "Camisa";
+            case "S":
+                return "Sudadera";
+            case "P":
+                return "Pantalon";
+            default:
+                return null;
+        }
+
+    } 
+    public String getInventoryStatus(){
+        if(Cantidad<2){
+            return "Low Stock";
+        }
+        else if(Cantidad==0){
+            return "Out of Stock";
+        }else{
+            return "In Stock";
+        }
+
+    }
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.IdProducto;
-        hash = 13 * hash + Objects.hashCode(this.Nombre);
-        hash = 13 * hash + Objects.hashCode(this.ImagenUrl);
-        hash = 13 * hash + Objects.hashCode(this.Marca);
-        hash = 13 * hash + this.Descripcion;
-        hash = 13 * hash + this.Cantidad;
-        hash = 13 * hash + Objects.hashCode(this.Tipo);
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
-        hash = 13 * hash + Objects.hashCode(this.Valoracion);
+        int hash = 5;
+        hash = 83 * hash + this.IdProducto;
+        hash = 83 * hash + Objects.hashCode(this.Nombre);
+        hash = 83 * hash + Objects.hashCode(this.ImagenUrl);
+        hash = 83 * hash + Objects.hashCode(this.Marca);
+        hash = 83 * hash + Objects.hashCode(this.Descripcion);
+        hash = 83 * hash + this.Cantidad;
+        hash = 83 * hash + Objects.hashCode(this.Tipo);
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
+        hash = 83 * hash + Objects.hashCode(this.Valoracion);
         return hash;
     }
 
@@ -155,9 +183,6 @@ public class Producto implements Serializable {
         if (this.IdProducto != other.IdProducto) {
             return false;
         }
-        if (this.Descripcion != other.Descripcion) {
-            return false;
-        }
         if (this.Cantidad != other.Cantidad) {
             return false;
         }
@@ -173,6 +198,9 @@ public class Producto implements Serializable {
         if (!Objects.equals(this.Marca, other.Marca)) {
             return false;
         }
+        if (!Objects.equals(this.Descripcion, other.Descripcion)) {
+            return false;
+        }
         if (!Objects.equals(this.Tipo, other.Tipo)) {
             return false;
         }
@@ -181,6 +209,8 @@ public class Producto implements Serializable {
         }
         return true;
     }
+
+   
     
     
 }

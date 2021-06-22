@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+         <h:form id="frmPrincipal" class="ui-fluid">
+            <p:fieldset legend="Datos del Producto">
+                <h:panelGrid id="pgDatospersonales"  columns="3"  styleClass="ui-noborder" cellpadding="3" >
+                    
+                    <p:outputLabel value="Nombre: " for="@next"/>
+                    <p:inputText   value="#{crearProductoController.producto.nombre}"  required ="true" requiredMessage="el nombre del producto es obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Marca: " for="@next"/>
+                    <p:inputText value="#{crearProductoController.producto.marca}" required="true" requiredMessage="La marca es obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Descripción" for="@next"/>
+                    <p:inputTextarea rows="10" cols="33" value="#{crearProductoController.producto.descripcion}"/>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel for="@next" value="Tipo"/>
+                    <p:selectOneMenu id="group" value="#{crearProductoController.producto.tipo}" required="true" requiredMessage="El tipo es necesario">
+                            <f:selectItem itemLabel="Zapatillas" itemValue="Z"/>
+                            <f:selectItem itemLabel="Pantalones" itemValue="P"/>
+                            <f:selectItem itemLabel="Camisetas" itemValue="C"/>
+                            <f:selectItem itemLabel="Camisas" itemValue="CM"/>
+                            <f:selectItem itemLabel="Sudadera" itemValue="S"/>
+                        </p:selectOneMenu>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel value="Cantidad" for="@next"/>
+                    <p:spinner value="#{crearProductoController.producto.cantidad}" required="true" requiredMessage="cantidad es necesaria"/>
+                    <p:message for="@previous"/>
+  
+                    
+                    <p:outputLabel value="Precio" for="@next"/>
+                    <p:inputNumber value="#{crearProductoController.producto.precio}" required="true" requiredMessage="Precio es necesario"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Url" for="@next"/>
+                    <p:inputText value="#{crearProductoController.producto.imagenUrl}" required="true" requiredMessage="Url es necesario"/>
+                    <p:message for="@previous"/>
+                   
+                   <!-- <p:graphicImage id="yok" width="200 px" url="#{crearProductoController.producto.imagenUrl}" />-->
+
+                </h:panelGrid>
+                <p:commandButton value="Crear Producto" action="#{crearProductoController.crearProducto()}" update="frmPrincipal"/>
+            </p:fieldset>
+             </h:form>
+    </ui:define>
+
+</ui:composition>

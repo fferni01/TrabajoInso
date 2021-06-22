@@ -7,6 +7,9 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
+        <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+        </p:messages>
          <h:form id="frmPrincipal">
             <p:fieldset legend="Datos Personales">
                 <h:panelGrid id="pgDatospersonales" columns="3"  styleClass="ui-noborder" cellpadding="3" >
@@ -15,7 +18,7 @@
                     <p:message for="@previous"/>
 
                     <p:outputLabel value="Primer apellido:" for="@next"/>
-                    <p:inputText value="#{miCuentaTrabajadorController.persona.apellido2}" required="true" requiredMessage="El primer apellido es un campo obligatorio"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.apellido1}" required="true" requiredMessage="El primer apellido es un campo obligatorio"/>
                     <p:message for="@previous"/>
 
                     <p:outputLabel value="Segundo apellido:" for="@next"/>
@@ -52,7 +55,33 @@
                 </h:panelGrid>
                 <p:commandButton value="Modificar" action="#{miCuentaTrabajadorController.modificar()}" update="frmPrincipal"/>
             </p:fieldset>
-         </h:form>
+             </h:form>
+        <h:form id="Usuario">
+              <p:fieldset legend="Usuario">
+                 <h:panelGrid id="pgDatosAcceso" columns="2"  styleClass="ui-noborder" cellpadding="3" >
+                       
+                    <p:outputLabel value="Nombre de usuario: " for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.usuario.user}"/>
+                </h:panelGrid>
+                  <p:commandButton value="Cambiar" action="#{miCuentaTrabajadorController.modificarNombreUsuario()}"/>
+                </p:fieldset>
+        </h:form>
+             <h:form id="frmContraseña">
+             <p:fieldset legend="Cambiar Contraseña">
+                  <h:panelGrid id="otro" columns="3"  styleClass="ui-noborder" cellpadding="3" >
+                    <p:outputLabel value="Cambiar Contraseña:" for="@next"/>
+                    <p:password value="#{miCuentaTrabajadorController.password}" id ="password1" required="true" feedback="true" match="password2" promptLabel="Introduzca contraseña" strongLabel="Clave muy segura" weakLabel="Clave insegura"/>
+                    <p:message for="@previous"/>
+                    <p:outputLabel value="Repita nueva Contraseña:" for="@next"/>
+                    <p:password id="password2" required="true" requiredMessage="Es obligatorio repetir contraseña"/>
+                    <p:message for="@previous"/>
+                    <p:commandButton value="Cambiar contraseña" action="#{miCuentaTrabajadorController.modificarContraseniaUsuario()}"/>
+                </h:panelGrid>
+             </p:fieldset>
+            </h:form>
+                  
+            
+         
     </ui:define>
 
 </ui:composition>
