@@ -12,6 +12,7 @@ com\unileon\EJB\DevolucionFacade.class
 com\unileon\EJB\PersonaFacadeLocal.class
 com\unileon\modelo\Valoracion.class
 com\unileon\EJB\ProductoFacadeLocal.class
+com\unileon\controller\Trabajador\DescuentoTrabajadorController.class
 com\unileon\EJB\ValoracionFacade.class
 com\unileon\EJB\AbstractFacade.class
 com\unileon\EJB\DevolucionFacadeLocal.class
@@ -46,6 +47,7 @@ com\unileon\modelo\Descuento_.class
 com\unileon\controller\IndexController.class
 com\unileon\EJB\VentaFacade.class
 com\unileon\modelo\Persona_.class
+com\unileon\controller\Trabajador\miCuentaTrabajadorController.class
 com\unileon\modelo\Rol.class
 com\unileon\EJB\UsuarioFacade.class
 com\unileon\controller\MenuController.class

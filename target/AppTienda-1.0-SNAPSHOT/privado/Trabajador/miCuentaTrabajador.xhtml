@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+         <h:form id="frmPrincipal">
+            <p:fieldset legend="Datos Personales">
+                <h:panelGrid id="pgDatospersonales" columns="3"  styleClass="ui-noborder" cellpadding="3" >
+                    <p:outputLabel value="Nombre:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.nombre}"  required ="true" requiredMessage="Nombre es un campo obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Primer apellido:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.apellido2}" required="true" requiredMessage="El primer apellido es un campo obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Segundo apellido:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.apellido2}"/>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel for="@next" value="Genero"/>
+                    <p:selectOneMenu id="group" value="#{miCuentaTrabajadorController.genero}" >
+                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                        </p:selectOneMenu>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel value="Fecha de nacimiento" for="@next"/>
+                    <p:calendar value="#{miCuentaTrabajadorController.persona.fechaNacimiento}" required="true" requiredMessage="Fecha de nacimiento es necesario"/>
+                    <p:message for="@previous"/>
+  
+                    
+                    <p:outputLabel value="Numero de telefono:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.telefono}" required="true" requiredMessage="Numero de telefono es necesario"/>
+                    <p:message for="@previous"/>
+
+                    
+                    <p:outputLabel value="DNI:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.DNI}" required="true" requiredMessage="DNI es necesario"/>
+                    <p:message for="@previous"/>
+
+                    
+                    <p:outputLabel value="Dirección:" for="@next"/>
+                    <p:inputText value="#{miCuentaTrabajadorController.persona.direccion}" required="true" requiredMessage="Dirección es necesario"/>
+                    <p:message for="@previous"/>
+
+
+                </h:panelGrid>
+                <p:commandButton value="Modificar" action="#{miCuentaTrabajadorController.modificar()}" update="frmPrincipal"/>
+            </p:fieldset>
+         </h:form>
+    </ui:define>
+
+</ui:composition>

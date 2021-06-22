@@ -31,11 +31,13 @@ C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\modelo\Devolucion.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\modelo\Rol.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\controller\Admin\AltaTrabajadorController.java
+C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\controller\Trabajador\DescuentoTrabajadorController.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\DevolucionFacade.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\VentaFacade.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\VentaFacadeLocal.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\controller\MenuController.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\CopiaCarritoFacadeLocal.java
+C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\controller\Trabajador\miCuentaTrabajadorController.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\UsuarioFacade.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\EJB\ValoracionFacade.java
 C:\Users\Usuario\Documents\NetBeansProjects\AppTienda\src\main\java\com\unileon\modelo\Persona.java
