@@ -136,22 +136,31 @@ public class Producto implements Serializable {
             case "S":
                 return "Sudadera";
             case "P":
-                return "Pantalon";
+                return "Pantalón";
             default:
-                return null;
+                return "X";
         }
 
     } 
     public String getInventoryStatus(){
-        if(Cantidad<2){
-            return "Low Stock";
+        if(Cantidad==0){
+            return "Fuera de Stock";
         }
-        else if(Cantidad==0){
-            return "Out of Stock";
+        else if(Cantidad<3){
+            return "Poco Stock";
         }else{
-            return "In Stock";
+            return "En Stock";
         }
-
+    }
+        public String getInventoryStatusCss(){
+        if(Cantidad==0){
+            return "out-of-stock";
+        }
+        else if(Cantidad<3){
+            return "low-stock";
+        }else{
+            return "in-stock";
+        }
     }
     @Override
     public int hashCode() {

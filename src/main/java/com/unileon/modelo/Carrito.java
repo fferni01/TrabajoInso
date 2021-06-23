@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="descuentos")
+@Table(name="carrito")
 
 public class Carrito implements Serializable{
     
@@ -37,8 +37,7 @@ public class Carrito implements Serializable{
     private Producto Producto;
     @Column(name="Cantidad")
     private int Cantidad;
-     @Column(name="Precio")
-    private double Precio;
+
 
     public int getIdCarrito() {
         return IdCarrito;
@@ -64,6 +63,7 @@ public class Carrito implements Serializable{
         this.Producto = Producto;
     }
 
+
     public int getCantidad() {
         return Cantidad;
     }
@@ -72,22 +72,13 @@ public class Carrito implements Serializable{
         this.Cantidad = Cantidad;
     }
 
-    public double getPrecio() {
-        return Precio;
-    }
-
-    public void setPrecio(double Precio) {
-        this.Precio = Precio;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.IdCarrito;
-        hash = 61 * hash + Objects.hashCode(this.Persona);
-        hash = 61 * hash + Objects.hashCode(this.Producto);
-        hash = 61 * hash + this.Cantidad;
-        hash = 61 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
+        int hash = 3;
+        hash = 67 * hash + this.IdCarrito;
+        hash = 67 * hash + Objects.hashCode(this.Persona);
+        hash = 67 * hash + Objects.hashCode(this.Producto);
+        hash = 67 * hash + this.Cantidad;
         return hash;
     }
 
@@ -109,9 +100,6 @@ public class Carrito implements Serializable{
         if (this.Cantidad != other.Cantidad) {
             return false;
         }
-        if (Double.doubleToLongBits(this.Precio) != Double.doubleToLongBits(other.Precio)) {
-            return false;
-        }
         if (!Objects.equals(this.Persona, other.Persona)) {
             return false;
         }
@@ -120,5 +108,7 @@ public class Carrito implements Serializable{
         }
         return true;
     }
+
+
      
 }

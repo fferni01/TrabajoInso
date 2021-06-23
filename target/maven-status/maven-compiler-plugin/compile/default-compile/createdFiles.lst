@@ -1,5 +1,6 @@
 com\unileon\modelo\Carrito_.class
 com\unileon\EJB\CopiaCarritoFacadeLocal.class
+com\unileon\controller\cliente\VerPedidoControllerFinalizado.class
 com\unileon\EJB\PersonaFacade.class
 com\unileon\modelo\CopiaCarrito.class
 com\unileon\EJB\UsuarioFacadeLocal.class
@@ -42,6 +43,7 @@ com\unileon\EJB\VentaFacadeLocal.class
 com\unileon\modelo\Devolucion_.class
 com\unileon\EJB\ProductoFacade.class
 com\unileon\EJB\MenuFacadeLocal.class
+com\unileon\controller\cliente\PedidosController.class
 com\unileon\modelo\Menu.class
 com\unileon\controller\Admin\CambiarContraseñaAdminController.class
 com\unileon\controller\AltaClienteController.class
@@ -56,6 +58,7 @@ com\unileon\modelo\Rol.class
 com\unileon\EJB\UsuarioFacade.class
 com\unileon\controller\MenuController.class
 com\unileon\controller\PlantillaContoller.class
+com\unileon\controller\cliente\cestaController.class
 com\unileon\EJB\DescuentoFacade.class
 com\unileon\modelo\Persona.class
 com\unileon\controller\Admin\EditarTrabajadorController.class

@@ -6,9 +6,12 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.CopiaCarrito;
+import com.unileon.modelo.Venta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,11 @@ public class CopiaCarritoFacade extends AbstractFacade<CopiaCarrito> implements 
     public CopiaCarritoFacade() {
         super(CopiaCarrito.class);
     }
-    
+    public List<CopiaCarrito> findPorVenta(Venta venta){
+        String consultaJPQL = "FROM CopiaCarrito c WHERE c.Venta=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", venta);
+        List<CopiaCarrito> resultado = query.getResultList();
+        return resultado;
+    }
 }
