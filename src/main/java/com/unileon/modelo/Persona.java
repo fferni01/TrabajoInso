@@ -60,7 +60,13 @@ public class Persona implements Serializable{
     
     @Column(name="Direccion")
     private String Direccion;
-
+    
+    @Column(name="CodigoPostal")
+    private String CodigoPostal;
+    @Column(name="Ciudad")
+    private String Ciudad;
+    @Column(name="Pais")
+    private String Pais;
 
     public int getIdPersona() {
         return idPersona;
@@ -142,19 +148,46 @@ public class Persona implements Serializable{
         this.Direccion = Direccion;
     }
 
+    public String getCodigoPostal() {
+        return CodigoPostal;
+    }
+
+    public void setCodigoPostal(String CodigoPostal) {
+        this.CodigoPostal = CodigoPostal;
+    }
+
+    public String getCiudad() {
+        return Ciudad;
+    }
+
+    public void setCiudad(String Ciudad) {
+        this.Ciudad = Ciudad;
+    }
+
+    public String getPais() {
+        return Pais;
+    }
+
+    public void setPais(String Pais) {
+        this.Pais = Pais;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + this.idPersona;
-        hash = 59 * hash + Objects.hashCode(this.Nombre);
-        hash = 59 * hash + Objects.hashCode(this.Apellido1);
-        hash = 59 * hash + Objects.hashCode(this.Apellido2);
-        hash = 59 * hash + Objects.hashCode(this.Sexo);
-        hash = 59 * hash + Objects.hashCode(this.FechaNacimiento);
-        hash = 59 * hash + Objects.hashCode(this.Telefono);
-        hash = 59 * hash + Objects.hashCode(this.Tarjeta);
-        hash = 59 * hash + Objects.hashCode(this.DNI);
-        hash = 59 * hash + Objects.hashCode(this.Direccion);
+        int hash = 5;
+        hash = 97 * hash + this.idPersona;
+        hash = 97 * hash + Objects.hashCode(this.Nombre);
+        hash = 97 * hash + Objects.hashCode(this.Apellido1);
+        hash = 97 * hash + Objects.hashCode(this.Apellido2);
+        hash = 97 * hash + Objects.hashCode(this.Sexo);
+        hash = 97 * hash + Objects.hashCode(this.FechaNacimiento);
+        hash = 97 * hash + Objects.hashCode(this.Telefono);
+        hash = 97 * hash + Objects.hashCode(this.Tarjeta);
+        hash = 97 * hash + Objects.hashCode(this.DNI);
+        hash = 97 * hash + Objects.hashCode(this.Direccion);
+        hash = 97 * hash + Objects.hashCode(this.CodigoPostal);
+        hash = 97 * hash + Objects.hashCode(this.Ciudad);
+        hash = 97 * hash + Objects.hashCode(this.Pais);
         return hash;
     }
 
@@ -197,11 +230,22 @@ public class Persona implements Serializable{
         if (!Objects.equals(this.Direccion, other.Direccion)) {
             return false;
         }
+        if (!Objects.equals(this.CodigoPostal, other.CodigoPostal)) {
+            return false;
+        }
+        if (!Objects.equals(this.Ciudad, other.Ciudad)) {
+            return false;
+        }
+        if (!Objects.equals(this.Pais, other.Pais)) {
+            return false;
+        }
         if (!Objects.equals(this.FechaNacimiento, other.FechaNacimiento)) {
             return false;
         }
         return true;
     }
+
+   
 
     
     

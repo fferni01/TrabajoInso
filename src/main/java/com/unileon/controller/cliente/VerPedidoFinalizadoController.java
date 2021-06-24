@@ -95,15 +95,23 @@ public class VerPedidoFinalizadoController implements Serializable{
         DevolucionEJB.create(D);
         double totalConDescuento=0;
         if(ProductoCarrito.getCantidad()==CantidadDevover){
+            if(venta.getDescuento()!=null){
             totalConDescuento=ProductoCarrito.getProducto().getPrecio()*venta.getDescuento().getPorcentaje()/100;
             totalConDescuento=ProductoCarrito.getProducto().getPrecio()-totalConDescuento;
             venta.setTotal(Math.round((venta.getTotal()-totalConDescuento)*100.0)/100.0);
+            }else{
+                venta.setTotal(Math.round((venta.getTotal()-(ProductoCarrito.getProducto().getPrecio()))*100.0)/100.0);
+            }
             VentaEJB.edit(venta);
             CopCarritoEJB.remove(ProductoCarrito);
         }else{
-            totalConDescuento=ProductoCarrito.getProducto().getPrecio()*venta.getDescuento().getPorcentaje()/100;
-            totalConDescuento=ProductoCarrito.getProducto().getPrecio()-totalConDescuento;
-            venta.setTotal(Math.round((venta.getTotal()-totalConDescuento)*100.0)/100.0);
+            if(venta.getDescuento()!=null){
+                totalConDescuento=ProductoCarrito.getProducto().getPrecio()*venta.getDescuento().getPorcentaje()/100;
+                totalConDescuento=ProductoCarrito.getProducto().getPrecio()-totalConDescuento;
+                venta.setTotal(Math.round((venta.getTotal()-totalConDescuento)*100.0)/100.0);
+            }else{
+                venta.setTotal(Math.round((venta.getTotal()-(ProductoCarrito.getProducto().getPrecio()))*100.0)/100.0);
+            } 
             VentaEJB.edit(venta);
             ProductoCarrito.setCantidad(ProductoCarrito.getCantidad()-CantidadDevover);
             CopCarritoEJB.edit(ProductoCarrito);

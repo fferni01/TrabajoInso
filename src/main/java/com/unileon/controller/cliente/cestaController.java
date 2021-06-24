@@ -150,6 +150,15 @@ public class cestaController implements Serializable{
       if("".equals(per.getApellido1())){
           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Es necesario introducir el primer apellido"));
       }
+      if("".equals(per.getCodigoPostal())){
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Es necesario introducir el código postal"));
+      }
+      if("".equals(per.getPais())){
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Es necesario introducir el país"));
+      }
+      if("".equals(per.getCiudad())){
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Es necesario introducir la ciudad"));
+      }
       if("".equals(per.getDireccion())){
           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Es necesario introducir la direccion"));
       }
@@ -171,7 +180,7 @@ public class cestaController implements Serializable{
     }
 
     private boolean faltaAlgunCampo() {
-        if("".equals(per.getNombre()) || "".equals(per.getApellido1())|| "".equals(per.getDireccion()) || "".equals(per.getTarjeta()) || "".equals(per.getTelefono())){
+        if("".equals(per.getNombre()) || "".equals(per.getApellido1())|| "".equals(per.getDireccion()) || "".equals(per.getTarjeta()) || "".equals(per.getTelefono()) || "".equals(per.getCodigoPostal()) || "".equals(per.getCiudad()) || "".equals(per.getPais())){
             return true;
         }
         return false;
