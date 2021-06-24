@@ -25,7 +25,7 @@ public class PlantillaContoller implements Serializable{
         us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         
         if(us==null){
-        FacesContext.getCurrentInstance().getExternalContext().redirect("../../publico/error.sw2");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("../../index.sw2");
         }
         
     }

@@ -5,6 +5,7 @@
  */
 package com.unileon.EJB;
 
+import com.unileon.modelo.Persona;
 import com.unileon.modelo.Venta;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,5 +30,9 @@ public interface VentaFacadeLocal {
     List<Venta> findRange(int[] range);
 
     int count();
+
+    public List<Venta> findVentaPorPersona(Persona persona);
+
+    public List<Venta> findAllPendientes();
     
 }

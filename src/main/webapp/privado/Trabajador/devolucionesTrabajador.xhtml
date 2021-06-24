@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns = "http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="frmPrincipal">
+        
+            <div class="card">
+                <p:dataTable var="d" value="#{devolucionesTrabajadorController.devoluciones}" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} productos"
+                         >
+                     <f:facet name="header">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Ropa Pendiente de devolución
+                </div>
+            </f:facet>
+                     <p:column headerText="Nombre de la Persona">
+                         <h:outputText value="#{d.persona.nombre} #{d.persona.apellido1}" />
+                    </p:column>
+
+                    <p:column headerText="Telefono">
+                        <h:outputText value="#{d.persona.telefono}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre Producto">
+                        <p:outputLabel value="#{d.producto.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Marca Producto">
+                        <p:outputLabel value="#{d.producto.marca}"/>
+                    </p:column>
+                    <p:column headerText="Imagen">
+                        <p:graphicImage  styleClass="img" height="100px"  url="#{d.producto.imagenUrl}"/>
+                    </p:column>
+
+                    <p:column headerText="Cantidad">
+                        <h:outputText value="#{d.cantidad}" />
+                    </p:column>
+
+                    <p:column headerText="Precio">
+                           <h:outputText value="#{d.producto.precio} $" />
+                    </p:column>
+
+                    <p:column >
+                        <p:commandLink value="Realizar Devolucion" oncomplete="PF('wdialogo').show()" update=":frmDialogo">
+                    <f:setPropertyActionListener value="#{d}"
+                                                 target="#{devolucionesTrabajadorController.devolucion}"/>
+                    </p:commandLink>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+        </h:form>
+
+        <h:form id="frmDialogo">
+            <p:dialog widgetVar="wdialogo" modal="true"
+                      closeOnEscape="true" draggable="false" resizable="false"
+                      header="Devolucion">
+                <p:outputLabel value="¿Aceptar devolución?"/>
+                <p:panelGrid columns="2" styleClass="ui-noborder">
+
+                    <p:commandButton value="Aceptar" 
+                                     action="#{devolucionesTrabajadorController.aceptarDevolucion()}"
+                                    oncomplete="PF('wdialogo').hide();"
+                                    update=":frmPrincipal"/>
+                    <p:commandButton value="Cancelar" onclick="PF('wdialogo').hide();"/>
+                </p:panelGrid>
+            </p:dialog>  
+        </h:form>
+    </ui:define>
+
+</ui:composition>

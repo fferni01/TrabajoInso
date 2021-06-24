@@ -6,6 +6,7 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.CopiaCarrito;
+import com.unileon.modelo.Venta;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface CopiaCarritoFacadeLocal {
     List<CopiaCarrito> findRange(int[] range);
 
     int count();
+
+    public List<CopiaCarrito> findPorVenta(Venta venta);
     
 }

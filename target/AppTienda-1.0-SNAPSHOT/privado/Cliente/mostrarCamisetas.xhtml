@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns = "http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+      
+             <p:growl id="growl" showDetail="true">
+                 <p:autoUpdate />
+             </p:growl>
+            <p:dataGrid id="dataGrid" var="product" value="#{mostrarCamisetasController.productos}" columns="4" layout="grid"
+                    rows="8" paginator="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="8,12,16">
+
+            <p:card style="width: 25em">
+            <div style="margin-bottom: 0">
+                <div class="product-grid-item-top">
+                    <div>
+                        <i class="pi pi-tag product-category-icon"/>
+                        <span class="product-category">#{product.tipoEscrito}</span>
+                        
+                    </div>
+                   <p:outputLabel styleClass="#{product.inventoryStatusCss.toLowerCase()}" >#{product.inventoryStatus}</p:outputLabel>
+                </div>
+                <div class="product-grid-item-content">
+                    
+                    <p:graphicImage  styleClass="img" height="300px" width="200 px" url="#{product.imagenUrl}"/>
+                    <div class="product-name">#{product.marca}</div>
+                    <div class="product-description">#{product.nombre}</div>
+                    <p:rating value="#{product.totalValoracion}">
+                        <p:ajax event="rate" listener="#{mostrarCamisetasController.editarValoracion(product)}" update=":form:growl :form:dataGrid"/>
+                        <p:ajax event="cancel" listener="#{mostrarCamisetasController.editarValoracion(product)}" update=":form:growl :form:dataGrid :form:productDetail"/>
+                    </p:rating>
+                </div>
+                <div class="product-grid-item-bottom">
+                    <h:outputText value="#{product.precio}" styleClass="product-price">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </h:outputText>
+                    <p:commandButton  update=":form:productDetail" oncomplete="PF('productDialog').show()"
+                                     styleClass="botton"
+                                     value="Añadir a la cesta"
+                                     icon="pi pi-shopping-cart"
+                                     disabled="#{product.inventoryStatus == 'Fuera de Stock'}"
+                                     action="#{mostrarCamisetasController.setProducto(product)}"
+                                     >
+                                      
+                        
+                    </p:commandButton>
+                </div>
+            </div>
+            </p:card>
+        </p:dataGrid>
+             <p:dialog header="Añadir a la Cesta" widgetVar="productDialog" modal="true" showEffect="fade"
+                  hideEffect="fade"
+                 resizable="false">
+                 <p:card style="width: 25em">
+                 <p:outputPanel id="productDetail" >
+                     <p:column rendered="#{not empty mostrarCamisetasController.producto}">
+                          <div class="product-grid-item-content">
+                    
+                    <p:graphicImage  styleClass="img" height="300px" width="200 px" url="#{mostrarCamisetasController.producto.imagenUrl}"/>
+                    <div class="product-name">#{mostrarCamisetasController.producto.marca}</div>
+                    <div class="product-description">#{mostrarCamisetasController.producto.nombre}</div>
+                    <p:rating  readonly="true" value="#{mostrarCamisetasController.producto.totalValoracion}"/>
+                </div>
+                         <div class="x">
+                         <h:outputText value="Cantidad:"></h:outputText>  
+                         <p:spinner id="basic" min="1" max="#{mostrarCamisetasController.producto.cantidad}" styleClass="spiner"  value="#{mostrarCamisetasController.cantidad}"/>
+                         
+                         </div>
+                         <div class="product-grid-item-bottom">
+                                
+                    <h:outputText value="#{mostrarCamisetasController.producto.precio}" styleClass="product-price">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </h:outputText>
+                             <p:commandButton
+                               
+                        actionListener="#{mostrarCamisetasController.introducirProductoCarrito()}"
+                        oncomplete="PF('productDialog').hide()"
+                        styleClass="botton"
+                        value="Añadir" icon="pi pi-shopping-cart"
+                        update=":form:dataGrid" />
+                </div>
+                     
+                     </p:column>
+                 </p:outputPanel>
+                 </p:card>
+             </p:dialog>
+  
+    </h:form>
+    </ui:define>
+
+</ui:composition>

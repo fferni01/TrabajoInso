@@ -31,9 +31,16 @@ public class Devolucion implements Serializable{
     @Column(name="Estado")
     private String Estado;
     
-    @JoinColumn(name="IdVenta")
+    @Column(name="Cantidad")
+    private int Cantidad;
+    
+    @JoinColumn(name="IdPersona")
     @ManyToOne
-    private Venta Venta;
+    private Persona Persona;
+    
+    @JoinColumn(name="IdProducto")
+    @ManyToOne
+    private Producto Producto;
 
     public int getIdDevolucion() {
         return IdDevolucion;
@@ -51,20 +58,47 @@ public class Devolucion implements Serializable{
         this.Estado = Estado;
     }
 
-    public Venta getVenta() {
-        return Venta;
+    public int getCantidad() {
+        return Cantidad;
+    }
+    
+    public String getEstadoCompleto(){
+        switch(Estado){
+            case "P":
+                return "Pendiente";
+            case "F":
+                return "Completada";
+        }
+        return null;
+    }
+    public void setCantidad(int Cantidad) {
+        this.Cantidad = Cantidad;
     }
 
-    public void setVenta(Venta Venta) {
-        this.Venta = Venta;
+    public Persona getPersona() {
+        return Persona;
+    }
+
+    public void setPersona(Persona Persona) {
+        this.Persona = Persona;
+    }
+
+    public Producto getProducto() {
+        return Producto;
+    }
+
+    public void setProducto(Producto Producto) {
+        this.Producto = Producto;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + this.IdDevolucion;
-        hash = 61 * hash + Objects.hashCode(this.Estado);
-        hash = 61 * hash + Objects.hashCode(this.Venta);
+        hash = 47 * hash + this.IdDevolucion;
+        hash = 47 * hash + Objects.hashCode(this.Estado);
+        hash = 47 * hash + this.Cantidad;
+        hash = 47 * hash + Objects.hashCode(this.Persona);
+        hash = 47 * hash + Objects.hashCode(this.Producto);
         return hash;
     }
 
@@ -83,14 +117,23 @@ public class Devolucion implements Serializable{
         if (this.IdDevolucion != other.IdDevolucion) {
             return false;
         }
+        if (this.Cantidad != other.Cantidad) {
+            return false;
+        }
         if (!Objects.equals(this.Estado, other.Estado)) {
             return false;
         }
-        if (!Objects.equals(this.Venta, other.Venta)) {
+        if (!Objects.equals(this.Persona, other.Persona)) {
+            return false;
+        }
+        if (!Objects.equals(this.Producto, other.Producto)) {
             return false;
         }
         return true;
     }
+    
+    
+
     
     
 }

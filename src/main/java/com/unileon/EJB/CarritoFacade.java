@@ -6,9 +6,12 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Carrito;
+import com.unileon.modelo.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,14 @@ public class CarritoFacade extends AbstractFacade<Carrito> implements CarritoFac
     public CarritoFacade() {
         super(Carrito.class);
     }
+    @Override
+     public List<Carrito> findProductosPorUsuario(Usuario us){
+         
+        String consultaJPQL = "FROM Carrito c WHERE c.Persona.idPersona=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", us.getPersona().getIdPersona());
+        List<Carrito> resultado = query.getResultList();
+        return resultado;
+     }
     
 }

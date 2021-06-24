@@ -6,9 +6,11 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Producto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,11 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
     public ProductoFacade() {
         super(Producto.class);
     }
-    
+    public List<Producto> findPorTipo(String s){
+        String consultaJPQL = "FROM Producto p WHERE p.Tipo=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", s);
+        List<Producto> resultado = query.getResultList();
+        return resultado;
+    }
 }

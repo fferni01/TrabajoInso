@@ -10,6 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="principal.css"/>
         <title>Facelets Template</title>
         <f:event type="preRenderView" listener="#{plantillaContoller.verificarYMostrar()}"/>
     </h:head>
@@ -17,11 +18,17 @@
     <h:body>
 
         <div id="top" class="top">
-             <p:menubar model="#{menuController.menuModel}" />
+            <h:form>
+                <p:menubar model="#{menuController.menuModel}" >
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar Sesion" action="#{menuController.destruirSesion()}" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+                    </f:facet>
+                </p:menubar>
+             </h:form>
         </div>
-
+        
         <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
+            <ui:insert name="content"></ui:insert>
         </div>
 
     </h:body>

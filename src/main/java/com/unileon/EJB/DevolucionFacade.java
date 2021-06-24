@@ -6,9 +6,12 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Devolucion;
+import com.unileon.modelo.Persona;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,22 @@ public class DevolucionFacade extends AbstractFacade<Devolucion> implements Devo
         super(Devolucion.class);
     }
     
+    @Override
+    public List<Devolucion> findPorPersona(Persona persona){
+       
+        String consultaJPQL = "FROM Devolucion d WHERE d.Persona=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", persona);
+        List<Devolucion> resultado = query.getResultList();
+        return resultado;
+        
+    }
+    @Override
+    public List<Devolucion> findPendientes(){
+        String consultaJPQL = "FROM Devolucion d WHERE d.Estado=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", "P");
+        List<Devolucion> resultado = query.getResultList();
+        return resultado;
+    }
 }

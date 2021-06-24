@@ -72,8 +72,8 @@ public class MenuController implements Serializable{
                 }
             }
         }
-        DefaultMenuItem  item = DefaultMenuItem.builder().value("Cerrar Sesion").command("#{menuController.destruirSesion()}").url("../../index.sw2").build();
-        menuModel.getElements().add(item);
+      /*  DefaultMenuItem  item = DefaultMenuItem.builder().value("Cerrar Sesion").command("#{menuController.destruirSesion()}").url("../../index.sw2").build();
+        menuModel.getElements().add(item);*/
        
     }
 
@@ -97,10 +97,10 @@ public class MenuController implements Serializable{
         
     }
     
-    public void destruirSesion(){
+    public String destruirSesion(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("com.unileon.controller.MenuController.destruirSesion()");
-        //return "../../index.softwareII";
+        return "../../index.softwareII";
     }
     
     public MenuModel getMenuModel() {

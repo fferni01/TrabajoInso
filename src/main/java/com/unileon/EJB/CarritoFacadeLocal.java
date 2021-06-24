@@ -6,6 +6,7 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Carrito;
+import com.unileon.modelo.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface CarritoFacadeLocal {
     List<Carrito> findRange(int[] range);
 
     int count();
+
+    public List<Carrito> findProductosPorUsuario(Usuario us);
     
 }

@@ -37,8 +37,6 @@ public class Producto implements Serializable {
     @Column(name="Marca")
     private String Marca;
     
-    @Column(name="Descripcion")
-    private int Descripcion;
     
     @Column(name="Cantidad")
     private int Cantidad;
@@ -49,9 +47,10 @@ public class Producto implements Serializable {
     @Column(name="Precio")
     private double Precio;
     
-    @JoinColumn(name="IdValoracion")
-    @ManyToOne
-    private Valoracion Valoracion;
+    @Column(name="TotalValoracion")
+    private int TotalValoracion;
+    
+
 
     public int getIdProducto() {
         return IdProducto;
@@ -85,14 +84,6 @@ public class Producto implements Serializable {
         this.Marca = Marca;
     }
 
-    public int getDescripcion() {
-        return Descripcion;
-    }
-
-    public void setDescripcion(int Descripcion) {
-        this.Descripcion = Descripcion;
-    }
-
     public int getCantidad() {
         return Cantidad;
     }
@@ -117,26 +108,65 @@ public class Producto implements Serializable {
         this.Precio = Precio;
     }
 
-    public Valoracion getValoracion() {
-        return Valoracion;
+
+
+    public String getTipoEscrito() {
+        switch(Tipo){
+            case "Z":
+                return "Zapatillas";
+            case "C":
+                return "camiseta";
+            case "CM":
+                return "Camisa";
+            case "S":
+                return "Sudadera";
+            case "P":
+                return "Pantalón";
+            default:
+                return "X";
+        }
+
+    } 
+    public String getInventoryStatus(){
+        if(Cantidad==0){
+            return "Fuera de Stock";
+        }
+        else if(Cantidad<3){
+            return "Poco Stock";
+        }else{
+            return "En Stock";
+        }
+    }
+        public String getInventoryStatusCss(){
+        if(Cantidad==0){
+            return "out-of-stock";
+        }
+        else if(Cantidad<3){
+            return "low-stock";
+        }else{
+            return "in-stock";
+        }
     }
 
-    public void setValoracion(Valoracion Valoracion) {
-        this.Valoracion = Valoracion;
+    public int getTotalValoracion() {
+        return TotalValoracion;
+    }
+
+    public void setTotalValoracion(int TotalValoracion) {
+        this.TotalValoracion = TotalValoracion;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 13 * hash + this.IdProducto;
-        hash = 13 * hash + Objects.hashCode(this.Nombre);
-        hash = 13 * hash + Objects.hashCode(this.ImagenUrl);
-        hash = 13 * hash + Objects.hashCode(this.Marca);
-        hash = 13 * hash + this.Descripcion;
-        hash = 13 * hash + this.Cantidad;
-        hash = 13 * hash + Objects.hashCode(this.Tipo);
-        hash = 13 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
-        hash = 13 * hash + Objects.hashCode(this.Valoracion);
+        hash = 89 * hash + this.IdProducto;
+        hash = 89 * hash + Objects.hashCode(this.Nombre);
+        hash = 89 * hash + Objects.hashCode(this.ImagenUrl);
+        hash = 89 * hash + Objects.hashCode(this.Marca);
+        hash = 89 * hash + this.Cantidad;
+        hash = 89 * hash + Objects.hashCode(this.Tipo);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
+        hash = 89 * hash + this.TotalValoracion;
         return hash;
     }
 
@@ -155,13 +185,13 @@ public class Producto implements Serializable {
         if (this.IdProducto != other.IdProducto) {
             return false;
         }
-        if (this.Descripcion != other.Descripcion) {
-            return false;
-        }
         if (this.Cantidad != other.Cantidad) {
             return false;
         }
         if (Double.doubleToLongBits(this.Precio) != Double.doubleToLongBits(other.Precio)) {
+            return false;
+        }
+        if (this.TotalValoracion != other.TotalValoracion) {
             return false;
         }
         if (!Objects.equals(this.Nombre, other.Nombre)) {
@@ -176,11 +206,15 @@ public class Producto implements Serializable {
         if (!Objects.equals(this.Tipo, other.Tipo)) {
             return false;
         }
-        if (!Objects.equals(this.Valoracion, other.Valoracion)) {
-            return false;
-        }
         return true;
     }
+
+    
+
+   
+    
+
+   
     
     
 }

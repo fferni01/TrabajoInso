@@ -48,10 +48,7 @@ public class Venta implements Serializable{
     @JoinColumn(name="IdPersona")
     @ManyToOne
     private Persona Persona;
-    
-    @JoinColumn(name="IdCopCarrito")
-    @ManyToOne
-    private Producto CopiaCarrito;
+
 
     public int getIdVenta() {
         return IdVenta;
@@ -75,6 +72,16 @@ public class Venta implements Serializable{
 
     public void setEstado(String Estado) {
         this.Estado = Estado;
+    }
+    
+    public String getEstadoCompleto(){
+        switch(Estado){
+            case "P":
+                return "Pendiente";
+            case "F":
+                return "Entregado";
+        }
+        return null;
     }
 
     public double getTotal() {
@@ -101,24 +108,15 @@ public class Venta implements Serializable{
         this.Persona = Persona;
     }
 
-    public Producto getCopiaCarrito() {
-        return CopiaCarrito;
-    }
-
-    public void setCopiaCarrito(Producto CopiaCarrito) {
-        this.CopiaCarrito = CopiaCarrito;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 19 * hash + this.IdVenta;
-        hash = 19 * hash + Objects.hashCode(this.Fecha);
-        hash = 19 * hash + Objects.hashCode(this.Estado);
-        hash = 19 * hash + (int) (Double.doubleToLongBits(this.Total) ^ (Double.doubleToLongBits(this.Total) >>> 32));
-        hash = 19 * hash + Objects.hashCode(this.Descuento);
-        hash = 19 * hash + Objects.hashCode(this.Persona);
-        hash = 19 * hash + Objects.hashCode(this.CopiaCarrito);
+        int hash = 7;
+        hash = 47 * hash + this.IdVenta;
+        hash = 47 * hash + Objects.hashCode(this.Fecha);
+        hash = 47 * hash + Objects.hashCode(this.Estado);
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.Total) ^ (Double.doubleToLongBits(this.Total) >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.Descuento);
+        hash = 47 * hash + Objects.hashCode(this.Persona);
         return hash;
     }
 
@@ -152,11 +150,12 @@ public class Venta implements Serializable{
         if (!Objects.equals(this.Persona, other.Persona)) {
             return false;
         }
-        if (!Objects.equals(this.CopiaCarrito, other.CopiaCarrito)) {
-            return false;
-        }
         return true;
     }
+
+
+
+    
     
     
 }

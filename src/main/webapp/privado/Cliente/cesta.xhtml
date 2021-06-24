@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+        <h:form id ="frmPrincipal">
+            <p:dataTable id ="Tabla" var="c" value="#{cestaController.productosCarrito}" rows="5"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} Productos"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}" >
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{c.producto.nombre}" />
+                </p:column>
+                <p:column headerText="Marca">
+                    <h:outputText value="#{c.producto.marca}" />
+                </p:column>
+
+                <p:column headerText="Imagen">
+                    <p:graphicImage  styleClass="img" height="100px"  url="#{c.producto.imagenUrl}"/>
+                </p:column>
+                
+                <p:column headerText="Cantidad">
+                    <p:spinner value="#{c.cantidad}" min="1" />
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <h:outputText value="#{c.producto.precio}" />
+                </p:column>
+                <p:column headerText="Eliminar">
+                    <p:commandLink value="Eliminar" action="#{cestaController.EliminarProductoCesta(c)}" update=":frmPrincipal" />
+                </p:column>
+                
+                <f:facet name="paginatorBottomRight">
+                    <p:commandButton value="Modificar Cantidades" action="#{cestaController.modificarCantidad()}" update=":frmPrincipal"/>
+                </f:facet>
+            </p:dataTable>
+        
+             <p:fieldset legend="Código Descunto">
+                <p:panelGrid id="descuento" columns="3" layout="grid" styleClass="showcase-text-align-center">
+                    <p:outputLabel value="Introduce codigo de descuento: " style="font-weight:bold"/>
+                    <p:inputText value="#{cestaController.descuento}" />
+                    <p:commandButton value="Introducir" action="#{cestaController.comprobarCodigoDescuento()}" update=":frmPrincipal:Precio"/>
+                </p:panelGrid>
+            </p:fieldset>
+            <p:fieldset legend="Confirmar Compra">
+                <p:panelGrid id="Precio" columns="3" layout="grid" styleClass="showcase-text-align-center">
+                    <p:outputLabel value="Porcentaje de descuento aplicado: " style="font-weight:bold"/>
+                    <p:outputLabel value="#{cestaController.porcentajeDescuento}%" style="font-weight:bold"/>
+                    <p:outputLabel/>
+                    <p:outputLabel value="Precio Total" style="font-weight:bold"/>
+                    <p:outputLabel value="#{cestaController.calcularPrecioTotal()} $" style="font-weight:bold"/>
+                    <p:commandButton value="Comprar" disabled="#{cestaController.comprobarTotal()}" oncomplete="PF('wdialogo').show()"/>
+                </p:panelGrid>
+            </p:fieldset>
+            </h:form>
+             <h:form id="frmDialogo">
+                    <p:dialog id="dialogo" widgetVar="wdialogo" modal="true"
+                              closeOnEscape="true" draggable="false" resizable="false"
+                              header="Confirmar Datos">
+                        <p:panelGrid columns="2" styleClass="ui-noborder">
+                            <p:outputLabel value="Nombre:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.nombre}"/>
+                            
+                            <p:outputLabel value="Primer apellido:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.apellido1}" />
+                            
+                            <p:outputLabel value="Numero de telefono:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.telefono}" />
+                            
+                            <p:outputLabel value="País:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.pais}"/>
+                            
+                            <p:outputLabel value="Ciudad" for="@next"/>
+                            <p:inputText value="#{cestaController.per.ciudad}"/>
+                            
+                            <p:outputLabel value="Código Postal" for="@next"/>
+                            <p:inputText value="#{cestaController.per.codigoPostal}"/>
+                            
+                            <p:outputLabel value="Direccion:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.direccion}"/>
+                            
+                            <p:outputLabel value="Tarjeta:" for="@next"/>
+                            <p:inputText value="#{cestaController.per.tarjeta}"/>
+                            
+                           
+                            <p:commandButton value="Confirmar Compra" 
+                                             action="#{cestaController.comprar()}"
+                                            oncomplete="PF('wdialogo').hide();"
+                                            update=":frmPrincipal:Tabla"/>
+                            <p:commandButton value="Cancelar" onclick="PF('wdialogo').hide();"/>
+                        </p:panelGrid>
+                    </p:dialog>
+                    
+                    
+                </h:form>
+        
+    </ui:define>
+
+</ui:composition>

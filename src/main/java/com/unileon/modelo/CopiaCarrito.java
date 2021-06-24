@@ -34,10 +34,12 @@ public class CopiaCarrito implements Serializable {
     @JoinColumn(name="IdProducto")
     @ManyToOne
     private Producto Producto;
+    @JoinColumn(name="IdVenta")
+    @ManyToOne
+    private Venta Venta;
     @Column(name="Cantidad")
     private int Cantidad;
-    @Column(name="Precio")
-    private double Precio;
+
 
     public int getIdCopCarrito() {
         return IdCopCarrito;
@@ -71,22 +73,22 @@ public class CopiaCarrito implements Serializable {
         this.Cantidad = Cantidad;
     }
 
-    public double getPrecio() {
-        return Precio;
+    public Venta getVenta() {
+        return Venta;
     }
 
-    public void setPrecio(double Precio) {
-        this.Precio = Precio;
+    public void setVenta(Venta Venta) {
+        this.Venta = Venta;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + this.IdCopCarrito;
-        hash = 61 * hash + Objects.hashCode(this.Persona);
-        hash = 61 * hash + Objects.hashCode(this.Producto);
-        hash = 61 * hash + this.Cantidad;
-        hash = 61 * hash + (int) (Double.doubleToLongBits(this.Precio) ^ (Double.doubleToLongBits(this.Precio) >>> 32));
+        hash = 17 * hash + this.IdCopCarrito;
+        hash = 17 * hash + Objects.hashCode(this.Persona);
+        hash = 17 * hash + Objects.hashCode(this.Producto);
+        hash = 17 * hash + Objects.hashCode(this.Venta);
+        hash = 17 * hash + this.Cantidad;
         return hash;
     }
 
@@ -108,17 +110,18 @@ public class CopiaCarrito implements Serializable {
         if (this.Cantidad != other.Cantidad) {
             return false;
         }
-        if (Double.doubleToLongBits(this.Precio) != Double.doubleToLongBits(other.Precio)) {
-            return false;
-        }
         if (!Objects.equals(this.Persona, other.Persona)) {
             return false;
         }
         if (!Objects.equals(this.Producto, other.Producto)) {
             return false;
         }
+        if (!Objects.equals(this.Venta, other.Venta)) {
+            return false;
+        }
         return true;
     }
-    
-    
+
+
+
 }

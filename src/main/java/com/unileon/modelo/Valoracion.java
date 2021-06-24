@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +24,7 @@ import javax.persistence.Table;
 @Table(name="valoraciones")
         
 public class Valoracion implements Serializable{
-    
+    //IdProducto
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int IdValoracion;
@@ -30,6 +32,14 @@ public class Valoracion implements Serializable{
     @Column(name="Valoracion")
     private int Valoracion;
 
+    @JoinColumn(name="IdProducto")
+    @ManyToOne
+    private Producto Producto;
+    
+    @JoinColumn(name="IdPersona")
+    @ManyToOne
+    private Persona Persona;
+    
     public int getIdValoracion() {
         return IdValoracion;
     }
@@ -46,11 +56,29 @@ public class Valoracion implements Serializable{
         this.Valoracion = Valoracion;
     }
 
+    public Producto getProducto() {
+        return Producto;
+    }
+
+    public void setProducto(Producto Producto) {
+        this.Producto = Producto;
+    }
+
+    public Persona getPersona() {
+        return Persona;
+    }
+
+    public void setPersona(Persona Persona) {
+        this.Persona = Persona;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + this.IdValoracion;
-        hash = 23 * hash + this.Valoracion;
+        int hash = 5;
+        hash = 31 * hash + this.IdValoracion;
+        hash = 31 * hash + this.Valoracion;
+        hash = 31 * hash + Objects.hashCode(this.Producto);
+        hash = 31 * hash + Objects.hashCode(this.Persona);
         return hash;
     }
 
@@ -72,8 +100,21 @@ public class Valoracion implements Serializable{
         if (this.Valoracion != other.Valoracion) {
             return false;
         }
+        if (!Objects.equals(this.Producto, other.Producto)) {
+            return false;
+        }
+        if (!Objects.equals(this.Persona, other.Persona)) {
+            return false;
+        }
         return true;
     }
+
+ 
+   
+
+    
+
+    
 
   
     
