@@ -32,7 +32,12 @@
                     <p:column headerText="Telefono">
                         <h:outputText value="#{p.persona.telefono}" />
                     </p:column>
-
+                    <p:column headerText="País">
+                        <p:outputLabel value="#{p.persona.pais}"/>
+                    </p:column>
+                    <p:column headerText="Ciudad">
+                        <p:outputLabel value="#{p.persona.ciudad}"/>
+                    </p:column>
                     <p:column headerText="Direccion">
                         <p:outputLabel value="#{p.persona.direccion}"/>
                     </p:column>

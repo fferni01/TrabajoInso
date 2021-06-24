@@ -20,9 +20,6 @@
                     <p:inputText value="#{editarProductoController.producto.marca}" required="true" requiredMessage="La marca es obligatorio"/>
                     <p:message for="@previous"/>
 
-                    <p:outputLabel value="Descripción" for="@next"/>
-                    <p:inputTextarea rows="10" cols="33" value="#{editarProductoController.producto.descripcion}"/>
-                    <p:message for="@previous"/>
                     
                     <p:outputLabel for="@next" value="Tipo"/>
                     <p:selectOneMenu id="group" value="#{editarProductoController.producto.tipo}" required="true" requiredMessage="El tipo es necesario">
