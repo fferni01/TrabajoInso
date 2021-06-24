@@ -61,7 +61,16 @@ public class Devolucion implements Serializable{
     public int getCantidad() {
         return Cantidad;
     }
-
+    
+    public String getEstadoCompleto(){
+        switch(Estado){
+            case "P":
+                return "Pendiente";
+            case "F":
+                return "Completada";
+        }
+        return null;
+    }
     public void setCantidad(int Cantidad) {
         this.Cantidad = Cantidad;
     }

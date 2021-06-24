@@ -7,17 +7,18 @@ package com.unileon.controller.cliente;
 
 import com.unileon.EJB.CarritoFacadeLocal;
 import com.unileon.EJB.CopiaCarritoFacadeLocal;
+import com.unileon.EJB.DescuentoFacadeLocal;
 import com.unileon.EJB.PersonaFacadeLocal;
 import com.unileon.EJB.ProductoFacadeLocal;
 import com.unileon.EJB.VentaFacadeLocal;
 import com.unileon.modelo.Carrito;
 import com.unileon.modelo.CopiaCarrito;
+import com.unileon.modelo.Descuento;
 import com.unileon.modelo.Persona;
 import com.unileon.modelo.Producto;
 import com.unileon.modelo.Usuario;
 import com.unileon.modelo.Venta;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -40,7 +41,9 @@ public class cestaController implements Serializable{
     private Usuario us;
     private Persona per;
     private double PrecioTotal;
-    
+    private Descuento ODescuento;
+    private String Descuento;
+    private double PorcentajeDescuento;
     @EJB
     CarritoFacadeLocal CarritoEJB;
     @EJB
@@ -54,13 +57,15 @@ public class cestaController implements Serializable{
     
     @EJB
     ProductoFacadeLocal ProductoEJB;
+    @EJB 
+    DescuentoFacadeLocal DescuentoEJB;
     
     @PostConstruct
     public void init(){
         us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         ProductosCarrito=CarritoEJB.findProductosPorUsuario(us);
         per = us.getPersona();
-        
+        PorcentajeDescuento=0;
     }
 
     public Persona getPer() {
@@ -86,19 +91,44 @@ public class cestaController implements Serializable{
     public void setUs(Usuario us) {
         this.us = us;
     }
+
+    public String getDescuento() {
+        return Descuento;
+    }
+
+    public void setDescuento(String Descuento) {
+        this.Descuento = Descuento;
+    }
     
     public void EliminarProductoCesta(Carrito c){
         CarritoEJB.remove(c);
         ProductosCarrito=CarritoEJB.findProductosPorUsuario(us);
     }
+    public double VerPorcentaje(){
+        if(ODescuento!=null){
+            return ODescuento.getPorcentaje();
+        }
+        return 0;
+    }
+
+    public double getPorcentajeDescuento() {
+        return PorcentajeDescuento;
+    }
+
+    public void setPorcentajeDescuento(double PorcentajeDescuento) {
+        this.PorcentajeDescuento = PorcentajeDescuento;
+    }
     
     public String calcularPrecioTotal(){
         PrecioTotal=0;
-        
+        double precioADescontar;
         for (int i = 0; i < ProductosCarrito.size(); i++) {
             PrecioTotal=PrecioTotal+(ProductosCarrito.get(i).getProducto().getPrecio()*ProductosCarrito.get(i).getCantidad());
         }
+        precioADescontar=PrecioTotal*PorcentajeDescuento/100.0;
+        PrecioTotal=PrecioTotal-precioADescontar;
         PrecioTotal=Math.round(PrecioTotal*100.0)/100.0;
+        
         String resultado = String.valueOf(PrecioTotal);
         return resultado;
         
@@ -157,6 +187,7 @@ public class cestaController implements Serializable{
         Date Fecha = new Date();
         v.setFecha(Fecha);
         v.setPersona(per);
+        v.setDescuento(ODescuento);
         VentaEJB.create(v);
        
         CopiarCarrito(v);
@@ -195,5 +226,25 @@ public class cestaController implements Serializable{
             }
         }
         return false;
+    }
+    
+    public void comprobarCodigoDescuento(){
+        List<Descuento> Codigos = DescuentoEJB.findAll();
+        boolean Mostrar =true;
+        for (int i = 0; i < Codigos.size(); i++) {
+            if(Descuento.equals(Codigos.get(i).getNombreDescuento())){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Descuento", "Descuento del "+Codigos.get(i).getPorcentaje()+"% aplicado"));
+                PorcentajeDescuento=Codigos.get(i).getPorcentaje();
+                Mostrar=false;
+                ODescuento=Codigos.get(i);
+            }
+        }
+        if(Mostrar){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Codigo de descuento no existe"));
+        }
+    }
+    
+    public boolean comprobarTotal(){
+        return PrecioTotal==0;
     }
 }

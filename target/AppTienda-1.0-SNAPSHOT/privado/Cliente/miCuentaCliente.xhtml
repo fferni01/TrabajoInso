@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+       <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+        </p:messages>
+         <h:form id="frmPrincipal">
+            <p:fieldset legend="Datos Personales">
+                <h:panelGrid id="pgDatospersonales" columns="3"  styleClass="ui-noborder" cellpadding="3" >
+                    <p:outputLabel value="Nombre:" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.nombre}"  required ="true" requiredMessage="Nombre es un campo obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Primer apellido:" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.apellido1}" required="true" requiredMessage="El primer apellido es un campo obligatorio"/>
+                    <p:message for="@previous"/>
+
+                    <p:outputLabel value="Segundo apellido:" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.apellido2}"/>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel for="@next" value="Genero"/>
+                    <p:selectOneMenu id="group" value="#{miCuentaClienteController.genero}" >
+                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                        </p:selectOneMenu>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel value="Fecha de nacimiento" for="@next"/>
+                    <p:calendar value="#{miCuentaClienteController.persona.fechaNacimiento}" required="true" requiredMessage="Fecha de nacimiento es necesario"/>
+                    <p:message for="@previous"/>
+  
+                    
+                    <p:outputLabel value="Numero de telefono:" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.telefono}"/>
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel value="Dirección:" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.direccion}" />
+                    <p:message for="@previous"/>
+                    
+                    <p:outputLabel value="Tarjeta" for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.persona.tarjeta}" />
+                    <p:message for="@previous"/>
+
+
+                </h:panelGrid>
+                <p:commandButton value="Modificar" action="#{miCuentaClienteController.modificar()}" update="frmPrincipal"/>
+            </p:fieldset>
+             </h:form>
+        <h:form id="Usuario">
+              <p:fieldset legend="Usuario">
+                 <h:panelGrid id="pgDatosAcceso" columns="2"  styleClass="ui-noborder" cellpadding="3" >
+                       
+                    <p:outputLabel value="Nombre de usuario: " for="@next"/>
+                    <p:inputText value="#{miCuentaClienteController.usuario.user}"/>
+                </h:panelGrid>
+                  <p:commandButton value="Cambiar" action="#{miCuentaClienteController.modificarNombreUsuario()}"/>
+                </p:fieldset>
+        </h:form>
+             <h:form id="frmContraseña">
+             <p:fieldset legend="Cambiar Contraseña">
+                  <h:panelGrid id="otro" columns="3"  styleClass="ui-noborder" cellpadding="3" >
+                    <p:outputLabel value="Cambiar Contraseña:" for="@next"/>
+                    <p:password value="#{miCuentaClienteController.password}" id ="password1" required="true" feedback="true" match="password2" promptLabel="Introduzca contraseña" strongLabel="Clave muy segura" weakLabel="Clave insegura"/>
+                    <p:message for="@previous"/>
+                    <p:outputLabel value="Repita nueva Contraseña:" for="@next"/>
+                    <p:password id="password2" required="true" requiredMessage="Es obligatorio repetir contraseña"/>
+                    <p:message for="@previous"/>
+                    <p:commandButton value="Cambiar contraseña" action="#{miCuentaClienteController.modificarContraseniaUsuario()}"/>
+                </h:panelGrid>
+             </p:fieldset>
+            </h:form>
+                  
+            
+         
+    </ui:define>
+
+</ui:composition>

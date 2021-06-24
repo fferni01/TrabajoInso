@@ -8,11 +8,11 @@ package com.unileon.controller.cliente;
 import com.unileon.EJB.VentaFacadeLocal;
 import com.unileon.modelo.Usuario;
 import com.unileon.modelo.Venta;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -22,7 +22,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class PedidosController {
+public class PedidosController implements Serializable{
     
     private List<Venta>Ventas;
     private Venta venta;
@@ -53,5 +53,11 @@ public class PedidosController {
     public void setVenta(Venta venta) {
         this.venta = venta;
     }
-    
+    public String comprobarEstado(){
+        if("F".equals(venta.getEstado())){
+            return "verPedidoFinalizado.sw2";
+        }else{
+            return "verPedidoPendiente.sw2";
+        }
+    }
 }

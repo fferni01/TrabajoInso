@@ -32,5 +32,7 @@ public interface VentaFacadeLocal {
     int count();
 
     public List<Venta> findVentaPorPersona(Persona persona);
+
+    public List<Venta> findAllPendientes();
     
 }

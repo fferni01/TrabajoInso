@@ -41,4 +41,11 @@ public class VentaFacade extends AbstractFacade<Venta> implements VentaFacadeLoc
         return resultado;
     }
     
+    public List<Venta> findAllPendientes(){
+        String consultaJPQL = "FROM Venta v WHERE v.Estado=:param1";
+        Query query = em.createQuery(consultaJPQL);
+        query.setParameter("param1", "P");
+        List<Venta> resultado = query.getResultList();
+        return resultado;
+    }
 }

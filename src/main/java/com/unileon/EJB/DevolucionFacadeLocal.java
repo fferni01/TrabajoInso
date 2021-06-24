@@ -6,6 +6,7 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Devolucion;
+import com.unileon.modelo.Persona;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,9 @@ public interface DevolucionFacadeLocal {
     List<Devolucion> findRange(int[] range);
 
     int count();
+
+    public List<Devolucion> findPorPersona(Persona persona);
+
+    public List<Devolucion> findPendientes();
     
 }

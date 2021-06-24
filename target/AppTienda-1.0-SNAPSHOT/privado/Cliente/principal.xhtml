@@ -33,7 +33,10 @@
                     <p:graphicImage  styleClass="img" height="300px" width="200 px" url="#{product.imagenUrl}"/>
                     <div class="product-name">#{product.marca}</div>
                     <div class="product-description">#{product.nombre}</div>
-                    <p:rating  readonly="true" />
+                    <p:rating value="#{product.totalValoracion}">
+                        <p:ajax event="rate" listener="#{principalController.editarValoracion(product)}" update=":form:growl :form:dataGrid"/>
+                        <p:ajax event="cancel" listener="#{principalController.editarValoracion(product)}" update=":form:growl :form:dataGrid :form:productDetail"/>
+                    </p:rating>
                 </div>
                 <div class="product-grid-item-bottom">
                     <h:outputText value="#{product.precio}" styleClass="product-price">
@@ -43,9 +46,11 @@
                                      styleClass="botton"
                                      value="Añadir a la cesta"
                                      icon="pi pi-shopping-cart"
-                                     disabled="#{product.inventoryStatus == 'Fuera de Stock'}">
-                        <f:setPropertyActionListener value="#{product}"
-                                                     target="#{principalController.producto}"/>
+                                     disabled="#{product.inventoryStatus == 'Fuera de Stock'}"
+                                     action="#{principalController.setProducto(product)}"
+                                     >
+                                      
+                        
                     </p:commandButton>
                 </div>
             </div>
@@ -62,7 +67,7 @@
                     <p:graphicImage  styleClass="img" height="300px" width="200 px" url="#{principalController.producto.imagenUrl}"/>
                     <div class="product-name">#{principalController.producto.marca}</div>
                     <div class="product-description">#{principalController.producto.nombre}</div>
-                    <p:rating  readonly="true" />
+                    <p:rating  readonly="true" value="#{principalController.producto.totalValoracion}"/>
                 </div>
                          <div class="x">
                          <h:outputText value="Cantidad:"></h:outputText>  

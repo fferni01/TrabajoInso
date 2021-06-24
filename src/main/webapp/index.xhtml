@@ -12,6 +12,7 @@ and open the template in the editor.
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <h:outputStylesheet library="css" name="index.css"/>
     </h:head>
     <h:body id="principal">
         <p:messages id="messages" showDetail="true" closable="true">
@@ -20,7 +21,8 @@ and open the template in the editor.
         
         <h:form>
             <div id="usuario">
-                <h:panelGrid columns="2">
+                <p:card style="width: 30em">
+                <p:panelGrid columns="2"  styleClass="ui-noborder">
                     <p:outputLabel value="Nombre de usuario" for="@next"/>
                     <p:inputText value="#{indexController.usuario.user}"/>
                     
@@ -28,9 +30,9 @@ and open the template in the editor.
                     <p:password value="#{indexController.usuario.password}"/>
                      
                     <p:commandButton value="Iniciar sesión" action="#{indexController.verificarUsuario()}"/>
-                    <p:commandButton value="Registrarse" action="publico/altaCliente.sw2?faces-redirect=true" />
-                </h:panelGrid>
-               
+                    <p:commandButton value="Registrarse" action="altaCliente.sw2" />
+                </p:panelGrid>
+               </p:card>
             </div>
         </h:form>
     </h:body>

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../../WEB-INF/template/Template.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,7 +12,7 @@
             <p:autoUpdate/>
         </p:messages>
         <h:form id ="frmPrincipal">
-        <p:dataTable var="p" value="#{verPedidoControllerFinalizado.productos}">
+        <p:dataTable var="p" value="#{verPedidoFinalizadoController.productos}">
                 <p:column headerText="Nombre">
                     <h:outputText value="#{p.producto.nombre}" />
                 </p:column>
@@ -34,14 +35,16 @@
             <p:column >
                 <p:commandLink value="Devolver" oncomplete="PF('wdialogo').show()" update=":frmDialogo">
                 <f:setPropertyActionListener value="#{p}"
-                                             target="#{verPedidoControllerFinalizado.productoCarrito}"/>
+                                             target="#{verPedidoFinalizadoController.productoCarrito}"/>
                 </p:commandLink>
                 </p:column>
             </p:dataTable>
             <p:fieldset legend="Precio Total">
             <p:panelGrid id="pgDatospersonales" columns="2" layout="grid" styleClass="showcase-text-align-center">
+                <p:outputLabel value="Descuento aplicado :" style="font-weight:bold"/>
+                <p:outputLabel value="#{verPedidoFinalizadoController.mostrarPorcentaje()} %" style="font-weight:bold"/>
                 <p:outputLabel value="Precio :" style="font-weight:bold"/>
-                <p:outputLabel value="#{verPedidoControllerFinalizado.venta.total} $" style="font-weight:bold"/>
+                <p:outputLabel value="#{verPedidoFinalizadoController.venta.total} $" style="font-weight:bold"/>
             </p:panelGrid>
         </p:fieldset>
         </h:form>
@@ -51,10 +54,10 @@
                               header="Confirmar Datos">
                         <p:panelGrid columns="2" styleClass="ui-noborder">
                             <p:outputLabel value="Cantidad a devolver:" for="@next"/>
-                            <p:spinner value="#{verPedidoControllerFinalizado.cantidadDevover}" max="#{verPedidoControllerFinalizado.productoCarrito.cantidad}" min="1"/>                      
+                            <p:spinner value="#{verPedidoFinalizadoController.cantidadDevover}" max="#{verPedidoFinalizadoController.productoCarrito.cantidad}" min="1"/>                      
                            
                             <p:commandButton value="Devolver" 
-                                             action="#{verPedidoControllerFinalizado.devolver()}"
+                                             action="#{verPedidoFinalizadoController.devolver()}"
                                             oncomplete="PF('wdialogo').hide();"
                                             update=":frmPrincipal"/>
                             <p:commandButton value="Cancelar" onclick="PF('wdialogo').hide();"/>

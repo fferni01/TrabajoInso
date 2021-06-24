@@ -10,6 +10,8 @@ import com.unileon.modelo.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -47,21 +49,24 @@ public class IndexController implements Serializable {
         else
             System.out.println("correcto.xhtml"); 
         //return "index";
-       if(nuevo == null)
-            return "error.sw2?faces-redirect=true";
-        else
-            return "privado/"+buscarRol(nuevo)+"/principal.sw2?faces-redirect=true";
-        
+       if(nuevo == null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario o contraseña incorrecta"));
+            //return "index.sw2";
+       }        
+       else{
+            return "privado/"+buscarRol(nuevo);
+       }
+        return null;
         
     }
     private String buscarRol(Usuario nuevo) {
         switch(nuevo.getRol().getIdRol()){
             case 1:
-                return "Trabajador";
+                return "Trabajador/pedidosTrabajador.sw2?faces-redirect=true";
             case 2:
-                return "Cliente";
+                return "Cliente/principal.sw2?faces-redirect=true";
             case 3:
-                return "Admin";
+                return "Admin/listarTrabajador.sw2?faces-redirect=true";
             default:
                 return "";
         }

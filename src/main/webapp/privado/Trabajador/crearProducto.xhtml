@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns = "http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../../WEB-INF/template/Template.xhtml"
                 xmlns:p="http://primefaces.org/ui"
@@ -20,9 +20,7 @@
                     <p:inputText value="#{crearProductoController.producto.marca}" required="true" requiredMessage="La marca es obligatorio"/>
                     <p:message for="@previous"/>
 
-                    <p:outputLabel value="Descripción" for="@next"/>
-                    <p:inputTextarea rows="10" cols="33" value="#{crearProductoController.producto.descripcion}"/>
-                    <p:message for="@previous"/>
+                    
                     
                     <p:outputLabel for="@next" value="Tipo"/>
                     <p:selectOneMenu id="group" value="#{crearProductoController.producto.tipo}" required="true" requiredMessage="El tipo es necesario">

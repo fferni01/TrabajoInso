@@ -5,6 +5,7 @@
  */
 package com.unileon.EJB;
 
+import com.unileon.modelo.Producto;
 import com.unileon.modelo.Valoracion;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,5 +30,7 @@ public interface ValoracionFacadeLocal {
     List<Valoracion> findRange(int[] range);
 
     int count();
+
+    public List<Valoracion> findValoracionesPorProducto(Producto product);
     
 }
