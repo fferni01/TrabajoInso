@@ -77,7 +77,7 @@ public class AltaClienteController implements Serializable{
         try{
             if(!existeUsuario()){
             crearPersona();
-             Rol tiporol = RolEJB.buscarRol("C");
+            Rol tiporol = RolEJB.buscarRol("C");
             usuario.setPersona(persona);
             usuario.setRol(tiporol);
             usuarioEJB.create(usuario);

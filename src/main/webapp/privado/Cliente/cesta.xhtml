@@ -29,7 +29,7 @@
                 </p:column>
                 
                 <p:column headerText="Cantidad">
-                    <p:spinner value="#{c.cantidad}" min="1" />
+                    <p:spinner value="#{c.cantidad}" min="1" max="#{c.producto.cantidad}" />
                 </p:column>
 
                 <p:column headerText="Precio">
