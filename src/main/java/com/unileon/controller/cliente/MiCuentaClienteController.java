@@ -87,11 +87,15 @@ public class MiCuentaClienteController implements Serializable{
     }
      public void modificarNombreUsuario(){
         try{
-            if(exite()){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario ya existe"));
+            if(usuario.getUser().equals("")){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario no puede estar vacío"));
             }else{
-            UsuarioEJB.edit(usuario);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Nombre de usuario modificado correctamente"));
+                if(exite()){
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario ya existe"));
+                }else{
+                UsuarioEJB.edit(usuario);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Nombre de usuario modificado correctamente"));
+                }
             }
         }catch(Exception e){
             

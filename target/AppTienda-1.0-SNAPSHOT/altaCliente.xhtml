@@ -8,6 +8,7 @@
     <h:head>
         <title>Alta Usuario</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <h:outputScript name="js/calendar_es.js" />
     </h:head>
     <h:body>
          <p:messages id="messages" showDetail="true" closable="true">
@@ -34,7 +35,8 @@
                     <p:message for="@previous"/>
   
                     <p:outputLabel value="Fecha de nacimiento" for="@next"/>
-                    <p:calendar value="#{altaClienteController.persona.fechaNacimiento}"  required="true" requiredMessage="Fecha de nacimiento es necesario"/>
+                    
+                    <p:calendar value="#{altaClienteController.persona.fechaNacimiento}" locale="es" required="true" requiredMessage="Fecha de nacimiento es necesario"/>
                     <p:message for="@previous"/>
                     
                     <p:outputLabel value="Numero de telefono:" for="@next"/>

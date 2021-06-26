@@ -168,13 +168,15 @@ public class PrincipalController implements Serializable{
 
     private boolean haRealizadoLaValoracionDeEsteProducto(Producto p) {
         List<Valoracion> listaValoraciones=valoracionEJB.findValoracionesPorProducto(p);
-        int idPersona =usuario.getPersona().getIdPersona();
-        for (int i = 0; i < listaValoraciones.size(); i++) {
-            if(listaValoraciones.get(i).getPersona().getIdPersona()==idPersona){
-                return true;
+        boolean val=false;
+        int i =0;
+        while(i < listaValoraciones.size()){
+            if(listaValoraciones.get(i).getPersona().getIdPersona()==usuario.getPersona().getIdPersona()){
+                val=true;
             }
+            i=i+1;
         }
-        return false;
+        return val;
     }
 
     private Valoracion recivirValoracionRealizada(Producto p) {
