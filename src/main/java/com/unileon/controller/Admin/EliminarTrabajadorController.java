@@ -5,6 +5,7 @@
  */
 package com.unileon.controller.Admin;
 
+import com.unileon.EJB.PersonaFacadeLocal;
 import com.unileon.EJB.UsuarioFacadeLocal;
 import com.unileon.modelo.Usuario;
 import java.io.Serializable;
@@ -27,6 +28,8 @@ public class EliminarTrabajadorController implements Serializable{
     
     @EJB
     UsuarioFacadeLocal UsuariosEJB;
+    @EJB
+    PersonaFacadeLocal PersonaEJB;
     
     @PostConstruct
     public void init(){
@@ -53,6 +56,7 @@ public class EliminarTrabajadorController implements Serializable{
         this.usuario=us;
     }
     public void eliminarTra(){
+        PersonaEJB.remove(usuario.getPersona());
         UsuariosEJB.remove(usuario);
         Usuarios=UsuariosEJB.findAllUsuarios("T");
     }
