@@ -22,14 +22,6 @@
                         <p:column headerText="Nombre Completo">
                             <h:outputText value="#{us.persona.nombre} #{us.persona.apellido1} #{us.persona.apellido2}" />
                         </p:column>
-                
-                        <p:column headerText="Sexo">
-                            <h:outputText value="#{us.persona.sexo}" />
-                        </p:column>
-
-                        <p:column headerText="DNI">
-                            <h:outputText value="#{us.persona.DNI}" />
-                        </p:column>
                         
                         <p:column headerText="Fecha de Nacimiento">
                             <h:outputText value="#{us.persona.fechaNacimiento}" >
@@ -40,12 +32,17 @@
                         <p:column headerText="Telefono">
                             <h:outputText value="#{us.persona.telefono}" />
                         </p:column>
-                        
-                        <p:column headerText="Direccion">
+                        <p:column headerText="País">
+                            <h:outputText value="#{us.persona.pais}" />
+                        </p:column>
+                        <p:column headerText="Ciudad">
+                            <h:outputText value="#{us.persona.ciudad}" />
+                        </p:column>
+                        <p:column headerText="Dirección">
                             <h:outputText value="#{us.persona.direccion}" />
                         </p:column>
 
-                         <p:column headerText="Eliminar Trabajador">
+                         <p:column headerText="Eliminar Cliente">
                             <p:commandLink id="Eliminar"  style="margin-right:20px;" oncomplete="PF('wdialogo').show();"
                                            actionListener="#{eliminarUsuariosController.setUsuario(us)}"
                                            update=":frmDialogo:dialogo">
